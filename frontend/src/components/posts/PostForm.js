@@ -41,7 +41,7 @@ class PostForm extends Component {
                     <label>Enter title</label>
                     <Field name='title' className='form-control' type='text' component={this.renderTitle} />
                     <label>Enter text</label>
-                    <Field name='text' className='form-control' type='text' component={this.renderText} />
+                    <Field name='text' style={{ height: '150px' }} className='form-control' type='text' component={this.renderText} />
                     <button className='btn btn-primary btn-sm'>{btnText}</button>
                 </form>
             </div>

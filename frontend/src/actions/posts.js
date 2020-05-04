@@ -1,11 +1,13 @@
 import axios from 'axios';
-import { reset } from 'redux-form'; // added
+import { reset } from 'redux-form';
 import { GET_POSTS, GET_POST, ADD_POST, DELETE_POST, EDIT_POST } from './types';
 import history from '../history';
 
+import { tokenConfig } from './auth';
+
 // GET POSTS
 export const getPosts = () => async dispatch => {
-    const res = await axios.get('/api/posts/');
+    const res = await axios.get('/api/posts/', tokenConfig(getState));
     dispatch({
         type: GET_POSTS,
         payload: res.data
@@ -14,7 +16,7 @@ export const getPosts = () => async dispatch => {
 
 // ADD POST
 export const addPost = formValues => async dispatch => {
-    const res = await axios.post('/api/posts/', { ...formValues });
+    const res = await axios.post('/api/posts/', { ...formValues }, tokenConfig(getState));
     dispatch({
         type: ADD_POST,
         payload: res.data
@@ -23,8 +25,8 @@ export const addPost = formValues => async dispatch => {
 };
 
 // GET POST
-export const getPost = id => async dispatch => { // added
-    const res = await axios.get(`/api/posts/${id}/`);
+export const getPost = id => async dispatch => {
+    const res = await axios.get(`/api/posts/${id}/`, tokenConfig(getState));
     dispatch({
         type: GET_POST,
         payload: res.data
@@ -32,8 +34,8 @@ export const getPost = id => async dispatch => { // added
 };
 
 // DELETE POST
-export const deletePost = id => async dispatch => { // added
-    await axios.delete(`/api/posts/${id}/`);
+export const deletePost = id => async dispatch => {
+    await axios.delete(`/api/posts/${id}/`, tokenConfig(getState));
     dispatch({
         type: DELETE_POST,
         payload: id
@@ -43,7 +45,7 @@ export const deletePost = id => async dispatch => { // added
 
 // EDIT POST
 export const editPost = (id, formValues) => async dispatch => {
-    const res = await axios.patch(`/api/posts/${id}/`, formValues);
+    const res = await axios.patch(`/api/posts/${id}/`, formValues, tokenConfig(getState));
     dispatch({
         type: EDIT_POST,
         payload: res.data
