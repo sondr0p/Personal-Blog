@@ -8,23 +8,25 @@ class Header extends Component {
         const { user, isAuthenticated } = this.props.auth;
 
         const userLinks = (
-            <div className='nav-item active dropdown show'>
-                <a className="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">{user ? user.username : ''}</a>
-                <div className='dropdown-menu'>
-                    <a className='dropdown-item' onClick={this.props.logout} >
-                        Logout
+            <div className='navbar-nav ml-auto'>
+                <div className='nav-item active dropdown show'>
+                    <a className="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">{user ? user.username : ''}</a>
+                    <div className='dropdown-menu'>
+                        <a className='dropdown-item' onClick={this.props.logout} >
+                            Logout
                     </a>
-                </div>
-            </div >
+                    </div>
+                </div >
+            </div>
         );
 
         const guestLinks = (
-            <div className='nav justify-content-end'>
-                <Link to='/register'>
-                    Sign Up
+            <div className='navbar-nav ml-auto'>
+                <Link to='/register' className='nav-item active'>
+                    <a className="nav-link">Sign Up</a>
                 </Link>
-                <Link to='/login'>
-                    Login
+                <Link to='/login' className='nav-item active'>
+                    <a className="nav-link">Login</a>
                 </Link>
             </div>
         );
@@ -34,14 +36,12 @@ class Header extends Component {
                 <Link to='/' className='navbar-brand'>
                     My Blog
                 </Link>
-                <div className="collapse navbar-collapse">
-                    <div className='navbar-nav mr-auto'>
-                        <Link to='/' className='nav-item active'>
-                            <a className="nav-link">Home</a>
-                        </Link>
-                        {isAuthenticated ? userLinks : guestLinks}
-                    </div>
+                <div className='navbar-nav'>
+                    <Link to='/' className='nav-item active'>
+                        <a className="nav-link">Home</a>
+                    </Link>
                 </div>
+                {isAuthenticated ? userLinks : guestLinks}
             </div>
         )
     }
