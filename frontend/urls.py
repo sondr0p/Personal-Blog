@@ -8,4 +8,6 @@ urlpatterns = [
     path('', index),
     path('edit/<int:pk>', PostDetailView.as_view()),
     path('delete/<int:pk>', PostDetailView.as_view()),
+    path('login', index),
+    path('register', index),
 ]

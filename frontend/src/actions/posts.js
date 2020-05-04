@@ -6,7 +6,7 @@ import history from '../history';
 import { tokenConfig } from './auth';
 
 // GET POSTS
-export const getPosts = () => async dispatch => {
+export const getPosts = () => async (dispatch, getState) => {
     const res = await axios.get('/api/posts/', tokenConfig(getState));
     dispatch({
         type: GET_POSTS,
@@ -15,7 +15,7 @@ export const getPosts = () => async dispatch => {
 };
 
 // ADD POST
-export const addPost = formValues => async dispatch => {
+export const addPost = formValues => async (dispatch, getState) => {
     const res = await axios.post('/api/posts/', { ...formValues }, tokenConfig(getState));
     dispatch({
         type: ADD_POST,
@@ -25,7 +25,7 @@ export const addPost = formValues => async dispatch => {
 };
 
 // GET POST
-export const getPost = id => async dispatch => {
+export const getPost = id => async (dispatch, getState) => {
     const res = await axios.get(`/api/posts/${id}/`, tokenConfig(getState));
     dispatch({
         type: GET_POST,
@@ -34,7 +34,7 @@ export const getPost = id => async dispatch => {
 };
 
 // DELETE POST
-export const deletePost = id => async dispatch => {
+export const deletePost = id => async (dispatch, getState) => {
     await axios.delete(`/api/posts/${id}/`, tokenConfig(getState));
     dispatch({
         type: DELETE_POST,
@@ -44,7 +44,7 @@ export const deletePost = id => async dispatch => {
 };
 
 // EDIT POST
-export const editPost = (id, formValues) => async dispatch => {
+export const editPost = (id, formValues) => async (dispatch, getState) => {
     const res = await axios.patch(`/api/posts/${id}/`, formValues, tokenConfig(getState));
     dispatch({
         type: EDIT_POST,

@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { login } from '../../actions/auth';
+import { register } from '../../actions/auth';
 
-class LoginForm extends Component {
+class RegisterForm extends Component {
     renderField = ({ input, label, type, meta: { touched, error } }) => {
         return (
             <div className={`field ${touched && error ? 'error' : ''} form-group has-danger`}>
@@ -17,17 +17,8 @@ class LoginForm extends Component {
         );
     };
 
-    hiddenField = ({ type, meta: { error } }) => {
-        return (
-            <div className='field form-group has-danger'>
-                <input type={type} className={`${error ? 'form-control is-invalid' : 'form-control'}`} />
-                {error && <div className='invalid-feedback'>{error}</div>}
-            </div>
-        );
-    };
-
     onSubmit = formValues => {
-        this.props.login(formValues);
+        this.props.register(formValues);
     };
 
     render() {
@@ -45,37 +36,65 @@ class LoginForm extends Component {
                         type='text'
                         component={this.renderField}
                         label='Username'
+                        validate={[required, minUserLength, maxUserLength]}
+                    />
+                    <Field
+                        name='email'
+                        type='email'
+                        component={this.renderField}
+                        label='Email'
+                        validate={required}
                     />
                     <Field
                         name='password'
                         type='password'
                         component={this.renderField}
                         label='Password'
+                        validate={required}
                     />
                     <Field
-                        name='non_field_errors'
-                        type='hidden'
-                        component={this.hiddenField}
+                        name='password2'
+                        type='password'
+                        component={this.renderField}
+                        label='Confirm Password'
+                        validate={[required, passwordsMatch]}
                     />
-                    <button className='btn btn-primary btn-sm'>Login</button>
+                    <button className='btn btn-primary btn-sm'>Register</button>
                 </form>
                 <p style={{ marginTop: '1rem' }}>
-                    Don't have an account? <Link to='/register'>Register</Link>
+                    Already have an account? <Link to='/login'>Login</Link>
                 </p>
             </div>
         );
     }
 }
 
+const required = value => (value ? undefined : 'Required');
+
+const minLength = min => value =>
+    value && value.length < min
+        ? `Must be at least ${min} characters`
+        : undefined;
+
+const minUserLength = minLength(8);
+
+const maxLength = max => value =>
+    value && value.length > max ? `Must be ${max} characters or less` : undefined;
+
+const maxUserLength = maxLength(16);
+
+const passwordsMatch = (value, allValues) =>
+    value !== allValues.password ? 'Passwords do not match' : undefined;
+
 const mapStateToProps = state => ({
     isAuthenticated: state.auth.isAuthenticated
 });
 
-LoginForm = connect(
+RegisterForm = connect(
     mapStateToProps,
-    { login }
-)(LoginForm);
+    { register }
+)(RegisterForm);
 
 export default reduxForm({
-    form: 'loginForm'
-})(LoginForm);
+    form: 'registerForm'
+})(RegisterForm);

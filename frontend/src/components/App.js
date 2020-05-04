@@ -12,6 +12,7 @@ import store from '../store';
 import Header from './layout/Header';
 
 import LoginForm from './auth/LoginForm';
+import RegisterForm from './auth/RegisterForm';
 import PrivateRoute from './common/PrivateRoute';
 
 import { loadUser } from '../actions/auth';
@@ -31,6 +32,7 @@ class App extends Component {
                         <Route exact path='/delete/:id' component={PostDelete} />
                         <Route exact path='/edit/:id' component={PostEdit} />
                         <Route exact path='/login' component={LoginForm} />
+                        <Route exact path='/register' component={RegisterForm} />
                     </Switch>
                 </Router>
             </Provider>
