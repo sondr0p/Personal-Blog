@@ -23,23 +23,22 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'frontend.apps.FrontendConfig',  # added
-    'posts.apps.PostsConfig',  # added
-    'rest_framework',  # added
+    'frontend.apps.FrontendConfig',
+    'posts.apps.PostsConfig',
+    'rest_framework',  # django rest api
     'knox',
+    'corsheaders',  # rest api
 ]
 
-REST_FRAMEWORK = {  # added
-    #'DEFAULT_PERMISSION_CLASSES': [
-    #    'rest_framework.permissions.AllowAny'
-    #],
-    'DEFAULT_AUTHENTICATION_CLASSES': (  # added
-        'knox.auth.TokenAuthentication',
-    ),
+REST_FRAMEWORK = {
+    #'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permissions.AllowAny'],
+    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication', ),
     'DATETIME_FORMAT': "%m/%d/%Y %H:%M:%S",
 }
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -118,3 +117,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'

@@ -28,6 +28,8 @@ class PostForm extends Component {
         );
     };
 
+
+
     onSubmit = formValues => {
         this.props.onSubmit(formValues);
     };
@@ -38,16 +40,22 @@ class PostForm extends Component {
             <div>
                 <form onSubmit={this.props.handleSubmit(this.onSubmit)}
                     className='form-group has-danger'>
-                    <label>Enter title</label>
-                    <Field name='title' className='form-control' type='text' component={this.renderTitle} />
-                    <label>Enter text</label>
-                    <Field name='text' style={{ height: '150px' }} className='form-control' type='text' component={this.renderText} />
+                    <Field name='title' label='Enter title' className='form-control' type='text' component={this.renderTitle} />
+                    <Field name='text' label='Enter text' style={{ height: '150px' }} className='form-control' type='text' component={this.renderText} />
+                    <Field name='image' label='' component={UploadFile} />
                     <button className='btn btn-primary btn-sm'>{btnText}</button>
                 </form>
             </div>
         );
     }
 }
+
+const UploadFile = ({ input: { value: omitValue, ...inputProps }, label, meta: omitMeta, ...props }) => (
+    <div>
+        <label className='form-control-label'>{label}</label>
+        <input type='file' id="image" {...inputProps} {...props} />
+    </div>
+);
 
 const validate = formValues => {
     const errors = {};
