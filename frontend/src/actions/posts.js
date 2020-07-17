@@ -16,7 +16,12 @@ export const getPosts = () => async (dispatch, getState) => {
 
 // ADD POST
 export const addPost = formValues => async (dispatch, getState) => {
-    const res = await axios.post('/api/posts/', { ...formValues }, tokenConfig(getState));
+    var formData = new FormData();
+    const object = { ...formValues };
+    for (const property in object) {
+        formData.append(property, object[property]);
+    }
+    const res = await axios.post('/api/posts/', formData, tokenConfig(getState));
     dispatch({
         type: ADD_POST,
         payload: res.data
