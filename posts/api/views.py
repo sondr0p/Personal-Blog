@@ -3,6 +3,7 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
+from rest_framework.renderers import JSONRenderer
 from .serializers import PostSerializer
 from posts.models import Post
 
@@ -12,6 +13,7 @@ class PostView(APIView):
     serializer_class = PostSerializer
     parser_classes = (MultiPartParser, FormParser)
     permission_classes = [permissions.IsAuthenticated]
+    renderer_classes = [JSONRenderer]
 
     def get(self, request, *args, **kwargs):
         posts = self.request.user.posts.all()

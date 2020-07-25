@@ -22,12 +22,8 @@ class Header extends Component {
 
         const guestLinks = (
             <div className='navbar-nav ml-auto'>
-                <Link to='/register' className='nav-item active'>
-                    <a className="nav-link">Sign Up</a>
-                </Link>
-                <Link to='/login' className='nav-item active'>
-                    <a className="nav-link">Login</a>
-                </Link>
+                <Link to='/register' className='nav-link'>Sign Up</Link>
+                <Link to='/login' className='nav-link'>Login</Link>
             </div>
         );
 
@@ -37,9 +33,7 @@ class Header extends Component {
                     My Blog
                 </Link>
                 <div className='navbar-nav'>
-                    <Link to='/' className='nav-item active'>
-                        <a className="nav-link">Home</a>
-                    </Link>
+                    <Link to='/' className='nav-link'>Home</Link>
                 </div>
                 {isAuthenticated ? userLinks : guestLinks}
             </div>

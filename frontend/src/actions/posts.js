@@ -19,7 +19,14 @@ export const addPost = formValues => async (dispatch, getState) => {
     var formData = new FormData();
     const object = { ...formValues };
     for (const property in object) {
-        formData.append(property, object[property]);
+        if (property === 'image') {
+            console.log(property, object[property][0]);
+            const file = object[property][0];
+            formData.append(property, file, file.name);
+        }
+        else {
+            formData.append(property, object[property]);
+        }
     }
     const res = await axios.post('/api/posts/', formData, tokenConfig(getState));
     dispatch({

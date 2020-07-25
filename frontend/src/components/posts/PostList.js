@@ -8,6 +8,13 @@ class PostList extends Component {
         this.props.getPosts();
     }
 
+    renderImage = (image) => {
+        if (image !== null)
+            return (<img style={{ maxWidth: "100%", maxHeight: "100%", padding: 50 }} src={post.image} alt="" />);
+        else
+            return null;
+    }
+
     render() {
         return (
             <div>
@@ -21,6 +28,7 @@ class PostList extends Component {
                             </div>
                             <div className='card-body'>
                                 <p className='card-text'>{post.text}</p>
+                                {post.image === null ? <img /> : <img style={{ maxWidth: "100%", maxHeight: "100%", marginBottom: 10 }} src={post.image} alt="" />}
                                 <Link
                                     to={`/delete/${post.id}`}
                                     className='btn btn-danger btn-sm'
