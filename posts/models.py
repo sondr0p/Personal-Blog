@@ -11,6 +11,7 @@ class Post(models.Model):
                               null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     image = models.ImageField(null=True, upload_to='post_images')
+    isPrivate = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title

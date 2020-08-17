@@ -28,6 +28,13 @@ class PostForm extends Component {
         );
     };
 
+    uploadImage = ({ input: { value: omitValue, ...inputProps }, label, meta: omitMeta, ...props }) => (
+        <div>
+            <label className='form-control-label'>{label}</label>
+            <input type='file' id="image" {...inputProps} {...props} />
+        </div>
+    );
+
 
 
     onSubmit = formValues => {
@@ -35,27 +42,18 @@ class PostForm extends Component {
     };
 
     render() {
-        const btnText = `${this.props.initialValues ? 'Update' : 'Add'}`;
         return (
             <div>
-                <form onSubmit={this.props.handleSubmit(this.onSubmit)}
+                <form id='postForm' onSubmit={this.props.handleSubmit(this.onSubmit)}
                     className='form-group has-danger'>
                     <Field name='title' label='Enter title' className='form-control' type='text' component={this.renderTitle} />
                     <Field name='text' label='Enter text' style={{ height: '150px' }} className='form-control' type='text' component={this.renderText} />
-                    <Field name='image' label='' component={UploadFile} />
-                    <button className='btn btn-primary btn-sm'>{btnText}</button>
+                    <Field name='image' label='Add Image' component={this.uploadImage} />
                 </form>
             </div>
         );
     }
 }
-
-const UploadFile = ({ input: { value: omitValue, ...inputProps }, label, meta: omitMeta, ...props }) => (
-    <div>
-        <label className='form-control-label'>{label}</label>
-        <input type='file' id="image" {...inputProps} {...props} />
-    </div>
-);
 
 const validate = formValues => {
     const errors = {};
