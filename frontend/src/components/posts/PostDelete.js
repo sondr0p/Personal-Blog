@@ -26,10 +26,10 @@ class PostDelete extends Component {
                     className='btn btn-primary'
                 >
                     Delete
-        </button>
+                </button>
                 <Link to='/' className='btn btn-secondary'>
                     Cancel
-        </Link>
+                </Link>
             </Fragment>
         );
     }

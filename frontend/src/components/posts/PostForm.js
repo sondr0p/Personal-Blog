@@ -20,7 +20,11 @@ class PostForm extends Component {
         return (
             <div className={`field ${touched && error ? 'error' : ''} form-group has-danger`}>
                 <label className='form-control-label'>{label}</label>
-                <textarea {...input} className={`${touched && error ? 'form-control is-invalid' : 'form-control'}`} autoComplete='off' />
+                <textarea {...input}
+                    className={`${touched && error ? 'form-control is-invalid' : 'form-control'}`}
+                    autoComplete='off'
+                    rows='3'
+                />
                 {touched && error && (
                     <span className='invalid-feedback'>{error}</span>
                 )}
@@ -28,12 +32,14 @@ class PostForm extends Component {
         );
     };
 
-    uploadImage = ({ input: { value: omitValue, ...inputProps }, label, meta: omitMeta, ...props }) => (
-        <div>
-            <label className='form-control-label'>{label}</label>
-            <input type='file' id="image" {...inputProps} {...props} />
-        </div>
-    );
+    uploadImage = ({ input: { value: omitValue, ...inputProps }, label, meta: omitMeta, ...props }) => {
+        return (
+            <div>
+                <label className='form-control-label'>{label}</label>
+                <input type='file' id="image" {...inputProps} {...props} />
+            </div>
+        );
+    }
 
 
 
@@ -47,8 +53,9 @@ class PostForm extends Component {
                 <form id='postForm' onSubmit={this.props.handleSubmit(this.onSubmit)}
                     className='form-group has-danger'>
                     <Field name='title' label='Enter title' className='form-control' type='text' component={this.renderTitle} />
-                    <Field name='text' label='Enter text' style={{ height: '150px' }} className='form-control' type='text' component={this.renderText} />
+                    <Field name='text' label='Enter text' className='form-control' type='text' component={this.renderText} />
                     <Field name='image' label='Add Image' component={this.uploadImage} />
+                    <button className='btn btn-info btn-sm'>TEST</button>
                 </form>
             </div>
         );

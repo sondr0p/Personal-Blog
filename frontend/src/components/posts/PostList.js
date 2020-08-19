@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getPosts, deletePost } from '../../actions/posts';
 import { Link } from 'react-router-dom'; // added
+import PostCreate from './PostCreate';
 
 class PostList extends Component {
     componentDidMount() {
@@ -18,6 +19,8 @@ class PostList extends Component {
     render() {
         return (
             <div>
+                <PostCreate />
+
                 {this.props.posts.map(post => (
                     <div className='item' key={post.id}>
                         <div className='card mb-3' style={{ maxWidth: '40rem' }}>

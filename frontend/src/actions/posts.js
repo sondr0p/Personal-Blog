@@ -20,7 +20,7 @@ export const addPost = formValues => async (dispatch, getState) => {
     const object = { ...formValues };
     for (const property in object) {
         if (property === 'image') {
-            console.log(property, object[property][0]);
+            // add the image if the post contains one
             const file = object[property][0];
             formData.append(property, file, file.name);
         }
@@ -47,6 +47,7 @@ export const getPost = id => async (dispatch, getState) => {
 
 // DELETE POST
 export const deletePost = id => async (dispatch, getState) => {
+    console.log(id);
     await axios.delete(`/api/posts/${id}/`, tokenConfig(getState));
     dispatch({
         type: DELETE_POST,
