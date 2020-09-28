@@ -15,7 +15,7 @@ class PostViewSet(viewsets.ModelViewSet):
     renderer_classes = [JSONRenderer]
 
     def get_queryset(self):  
-        return self.request.user.posts.all()
+        return self.request.user.posts.all().order_by('-id')
 
     def perform_create(self, serializer):  
         serializer.save(owner=self.request.user)

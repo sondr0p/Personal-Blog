@@ -55,7 +55,7 @@ class PostForm extends Component {
                     <Field name='title' label='Enter title' className='form-control' type='text' component={this.renderTitle} />
                     <Field name='text' label='Enter text' className='form-control' type='text' component={this.renderText} />
                     <Field name='image' label='Add Image' component={this.uploadImage} />
-                    <button className='btn btn-info btn-sm'>TEST</button>
+                    <button className='btn btn-info btn-md'>POST</button>
                 </form>
             </div>
         );
