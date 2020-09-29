@@ -1,6 +1,6 @@
 # Personal Blog
 
-This is a blog website I created using [React](https://reactjs.org/) for the front-end and [Django-Rest-Framework](https://www.django-rest-framework.org/) for the backend. I styled the website using [this](https://bootswatch.com/lux/) template from Bootswatch. I used the default database (SQLite) that comes with Django but feel free to use your preferred database.
+This is a blog application I created using [React](https://reactjs.org/) for the front-end and [Django-Rest-Framework](https://www.django-rest-framework.org/) for the backend. I styled the website using [this](https://bootswatch.com/lux/) template from Bootswatch. I used the default database (SQLite) that comes with Django but feel free to use your preferred database.
 
 ## Screenshots
 ![alt text](https://github.com/sondr0p/Personal-Blog/blob/master/screenshots/homepage.PNG)
